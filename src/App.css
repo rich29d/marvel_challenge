@@ -36,21 +36,37 @@ header {
   background: url(./assets/images/magnifying-glass.svg) right 20px center / 17px no-repeat rgba(0, 0, 0, 0.18);
 }
 
+@media screen and (max-width: 500px) {
+  .Logo {
+    width: 100%;
+    margin-bottom: 15px
+  }
+
+  .Logo img {
+    margin: auto;
+    display: block;
+  }
+
+  .Search {
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 /* CARDLIST */
 
 .CardList {
-  width: calc(100% - 100px);
-  max-width: 1500px;
+  width: 100%;
+  max-width: 1600px;
   margin: auto;
   margin-top: -150px;
-}
-
-.Separator {
-  width: 100%;
+  padding-right: 50px;
 }
 
 .Card {
-  width: calc(20% - 60px);
+  width: 20%;
+  padding-left: 50px;
   margin-bottom: 5%;
   position: relative;
   padding-top: 23%;
@@ -63,7 +79,7 @@ header {
 }
 
 .Card__Box {
-  width: 100%;
+  width: calc(100% - 50px);
   margin: auto;
   position: absolute;
   top: 0;
@@ -110,4 +126,85 @@ header {
 .Film__Info span {
   color: var(--primary);
   font-weight: bold;
+}
+
+@media screen and (max-width: 1000px) {
+  .Card {
+    width: 25%;
+    padding-top: 30%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .Card {
+    width: 33.33%;
+    padding-top: 40%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .Card {
+    width: 50%;
+    padding-top: 70%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .CardList {
+    margin-top: -100px;
+  }
+
+  .Card {
+    width: 100%;
+    padding-top: 150%;
+  }
+}
+
+/* OTHERS */
+
+.Message {
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    color: var(--primary);
+    font-size: 25px;
+    max-width: 470px;
+    padding-left: 50px;
+}
+
+.Message::before {
+  content: '';
+  background: url(./assets/images/cinema.svg) center center / contain no-repeat;
+  padding: 45px;
+  margin-bottom: 50px;
+  display: block;
+}
+
+.NotFound {
+  color: var(--text);
+}
+
+.NotFound span {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.NotFound::before {
+  background-image: url(./assets/images/oculos_cinema.svg); 
+}
+
+.Loading::before {
+  background-image: url(./assets/images/loading.svg); 
+}
+
+footer {
+  width: 100%;
+  height: 300px;
+  background: url(./assets/images/clapperboard.svg) center center / 80px no-repeat;
+}
+
+@media screen and (max-width: 500px) {
+  .Message {
+    margin-top: 50px;
+  }
 }
