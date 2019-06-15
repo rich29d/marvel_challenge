@@ -6,21 +6,6 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { Store } from "./share/store";
 
-// const initialState = {
-//   count: 0
-// };
-
-// function reducer(state = initialState, action) {
-//   console.log('reducer', state, action);
-//   return state;
-// }
-
-// const store = createStore(reducer);
-
-// store.dispatch({ type: "INCREMENT" });
-
-console.log(Store)
-
 ReactDOM.render(
   <Provider store={Store}>
     <App />

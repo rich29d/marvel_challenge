@@ -1,4 +1,4 @@
-import characters from '../api/character';
+import marvel from '../api/marvel';
 
 export const login = async (publicKey, privateKey) => {
   if (publicKey === '' || privateKey === '') {
@@ -6,20 +6,17 @@ export const login = async (publicKey, privateKey) => {
       error: '',
     };
   }
-  
-  const user = {
-    publicKey,
-    privateKey,
+
+  const valid = await marvel.verify(publicKey, privateKey);
+
+  if (valid) {
+    localStorage.setItem('user', JSON.stringify({
+      publicKey,
+      privateKey,
+    }));
+
+    window.location.assign('/');
   }
-
-  localStorage.removeItem('user');
-  localStorage.setItem('user', JSON.stringify(user));
-
-  const list = await characters.index();
-
-  console.log(list);
-  
-  window.location.assign('/');
 }
 
 export const logout = () => {

@@ -1,12 +1,12 @@
-const marvel = require('./marvel');
+import marvel from './marvel';
 
 export const index = async () => {
-    const { data = [] } = await marvel.get('/characters');
+    const { data: { data = {} } } = await marvel.get('/characters');
     return data;
 }
 
 export const find = async id => {
-    const { data = {} } = await marvel.get(`/characters/${id}`);
+    const { data: { data = {} } } = await marvel.get(`/characters/${id}`);
     return data;
 }
 
