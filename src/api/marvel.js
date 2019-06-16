@@ -4,6 +4,9 @@ const crypto = require('crypto');
 const options = {
   baseURL: 'https://gateway.marvel.com/v1/public',
   timeout: 5000,
+  params: {
+    key: '164c6660',
+  }
 }
 
 const generateParams = (publicKey, privateKey) => {
@@ -17,12 +20,12 @@ const generateParams = (publicKey, privateKey) => {
 }
 
 const create = () => {
-  const user = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user')) || {};
   
   const {
     publicKey = '',
     privateKey = ''
-  } = user || {};
+  } = user;
   
   return axios.create({
     ...options,

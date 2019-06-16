@@ -11,10 +11,6 @@ import Field from './Form/Field.jsx';
 import Button from './Form/Button.jsx';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       addPublicKey,
@@ -25,8 +21,8 @@ class Login extends Component {
 
     return (
       <div className='Login'>
-        <Field onTextChange={addPublicKey} placeholder={'Public key'}></Field>
-        <Field onTextChange={addPrivateKey} placeholder={'Private key'}></Field>
+        <Field onTextChange={addPublicKey} placeholder={'Public key'} value={publicKey}></Field>
+        <Field onTextChange={addPrivateKey} placeholder={'Private key'} value={privateKey}></Field>
         <Button text={'Login'} onClickEvent={() => service.login(publicKey, privateKey)}></Button>
       </div>
     );

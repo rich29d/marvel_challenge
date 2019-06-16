@@ -13,7 +13,7 @@ class Field extends Component {
   render() {
     return (
       <div className='Field'>
-        <input type="text" placeholder={this.props.placeholder} onChange={this.handleChange}/>
+        <input type="text" placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value}/>
       </div>
     );
   }

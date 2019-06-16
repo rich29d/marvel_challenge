@@ -15,7 +15,7 @@ export const login = async (publicKey, privateKey) => {
       privateKey,
     }));
 
-    window.location.assign('/');
+    window.location.assign('/characters');
   }
 }
 
