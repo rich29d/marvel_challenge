@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { get } from 'lodash';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Button from '../Form/Button.jsx';
 import service from '../../services/auth';
 import character from '../../api/character';
 import Line from './Line';
+import { changeLoading } from '../../share/actions';
 
 class List extends Component {
 	constructor(props) {
@@ -13,21 +16,20 @@ class List extends Component {
     this.state = {
       characterList: [],
       responseRequest: {},
-      searching: false,
+      loaded: false
     };
   }
-
-  loading(searching) { this.setState({searching}); }
 
   componentDidMount() { this.getCharacters(); }
 
   async getCharacters() {
-    this.loading(true);
+    this.props.changeLoading(true);
 
     const responseRequest = await character.index();
     this.setState({ responseRequest });
 
-    this.loading(false);
+    this.props.changeLoading(false);
+    this.setState({ loaded: true });
   }
 
   mountCharacterList(responseRequest) {
@@ -37,7 +39,7 @@ class List extends Component {
   }
 
 	render() {
-    const list = this.state.searching ? 'Loading' : this.mountCharacterList(this.state.responseRequest);
+    const list = this.state.loaded ? this.mountCharacterList(this.state.responseRequest): 'loading';
 
 		return (
 			<div className='Characters'>
@@ -48,4 +50,7 @@ class List extends Component {
 	}
 }
 
-export default List;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ changeLoading }, dispatch);
+
+export default connect(null, mapDispatchToProps)(List);

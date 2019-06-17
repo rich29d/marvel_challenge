@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import character from '../../api/character';
 import comic from '../../api/comic';
 import Line from './Line.jsx';
+import { changeLoading } from '../../share/actions';
 
 class Display extends Component {
   constructor(props) {
@@ -9,33 +13,26 @@ class Display extends Component {
     this.state = {
       comics: [],
       responseRequest: {},
-      searching: true,
+      loaded: false,
     };
   }
 
-  loading(searching) { this.setState({searching}); }
-
-  componentDidMount() {
-    this.getDisplay();
-    this.getComics()
+  async componentDidMount() {
+    this.props.changeLoading(true);
+    await this.getDisplay();
+    await this.getComics();
+    this.props.changeLoading(false);
+    this.setState({loaded: true});
   }
 
   async getDisplay() {
-    this.loading(true);
-
     const { results: characterItem = [] } = await character.find(this.props.match.params.id);  
     this.setState({ characterItem: characterItem[0] });
-
-    this.loading(false);
   }
 
   async getComics() {
-    this.loading(true);
-
     const { results: comics = [] } = await comic.index(this.props.match.params.id);  
     this.setState({ comics });
-
-    this.loading(false);
   }
 
   mountComicList(comics) {
@@ -72,10 +69,13 @@ class Display extends Component {
   }
 
   render() {    
-    const display = this.state.searching ? 'Loading' : this.mountDisplay(this.state.characterItem)
+    const display = this.state.loaded ? this.mountDisplay(this.state.characterItem) : 'loading';
 
     return (<div>{display}</div>)
   }
 }
 
-export default Display;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ changeLoading }, dispatch);
+
+export default connect(null, mapDispatchToProps)(Display);

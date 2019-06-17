@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { Store } from "./share/store";
+
+import './assets/fonts/fontawesome-free-5.9.0-web/css/all.min.css';
 
 ReactDOM.render(
   <Provider store={Store}>

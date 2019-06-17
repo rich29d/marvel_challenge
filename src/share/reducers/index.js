@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux';
 
 const initialState = {
-  privateKey: 'd09022779ec5382a35b5c0f23db8e159d7f04c43',
-  publicKey: '22b7cc3cf9db4a746e0ef6ae0f10e4bb',
+  loading: false,
 };
 
 const tokens = {
-  ADD_PRIVATE_KEY: 'privateKey',
-  ADD_PUBLIC_KEY: 'publicKey',
+  CHANGE_LOADING: 'loading',
 }
 
 const rootReducer = (state = initialState, action) => {
