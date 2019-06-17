@@ -1,10 +1,11 @@
 :root {
-  --primary: #857cfb;
+  --primary: #e94c23;
   --secundary: #fff;
   --text: #415873;
   --gray: #f1f1f1;
 
-  --size-1: 8px;
+  --size-10: 10px;
+  --size-20: 20px;
 }
 
 * {
@@ -48,12 +49,24 @@ body {
   justify-content: center;
 }
 
+.Text--right {
+  text-align: right;
+}
+
+.Size--20 {
+  font-size: var(--size-20);
+}
+
 .Width--4 {
   width: 33.33%;
 }
 
 .Width--12 {
   width: 100%;
+}
+
+.Width--11 {
+  width: 91.66%;
 }
 
 .Height__window--100 {
@@ -67,7 +80,7 @@ body {
 .SpaceBetween {
   justify-content: space-between;
 }
-Width--12
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #f1f1f1;
 }

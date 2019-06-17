@@ -16,7 +16,7 @@
 .Field label {
   font-size: 16px;
   color: var(--text);
-  margin-bottom: var(--size-1);
+  margin-bottom: var(--size-10);
   display: block;
   font-weight: bold;
 }

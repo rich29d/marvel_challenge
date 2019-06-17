@@ -11,9 +11,17 @@ class Button extends Component {
   }
 
   render() {
+    const {
+      className = '',
+      text = '',
+      icon
+    } = this.props;
+
+    const fonticon = icon ? <i class={`fas fa-${icon}`}></i> : '';
+
     return (
-      <div className='Button'>
-        <button type="text" onClick={this.handleChange}>{this.props.text}</button>
+      <div className={`Button ${className}`}>
+        <button type="text" onClick={this.handleChange}>{text} {fonticon}</button>
       </div>
     );
   }

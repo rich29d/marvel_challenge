@@ -1,0 +1,8 @@
+.Login {
+  max-width: 500px;
+  color: var(--text);
+}
+
+.Login img {
+  width: 200px;
+}

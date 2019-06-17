@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 const initialState = {
   loading: false,
+  
 };
 
 const tokens = {
