@@ -14,14 +14,16 @@ class Button extends Component {
     const {
       className = '',
       text = '',
-      icon
+      icon,
+      loading
     } = this.props;
 
     const fonticon = icon ? <i class={`fas fa-${icon}`}></i> : '';
+    const classLoading = loading ? 'loading' : ''
 
     return (
       <div className={`Button ${className}`}>
-        <button type="text" onClick={this.handleChange}>{text} {fonticon}</button>
+        <button type="text" className={classLoading} onClick={this.handleChange}>{text} {fonticon}</button>
       </div>
     );
   }

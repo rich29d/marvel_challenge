@@ -1,8 +1,10 @@
 :root {
-  --primary: #e94c23;
-  --secundary: #fff;
+  --primary: linear-gradient(45deg, #8467da, #5c5c76);
+  --secundary: #FFF;
   --text: #415873;
   --gray: #f1f1f1;
+  --gradientPurple: linear-gradient(45deg, #8467da, #de9ffe);
+  --purple: #8467da;
 
   --size-10: 10px;
   --size-20: 20px;
@@ -29,11 +31,18 @@ body {
   font-family: 'nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--secundary);
+  background: var(--primary);
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: var(--purple);
+  font-weight: bold;
 }
 
 .Flex {
   display: flex;
+  align-items: center;
 }
 
 .Nowrap {
@@ -77,8 +86,17 @@ body {
   margin-bottom: 25px;
 }
 
+.Margin__Bottom--45 {
+  margin-bottom: 45px;
+}
+
 .SpaceBetween {
   justify-content: space-between;
+}
+
+.MaxWidth {
+  max-width: 1200px;
+  margin: auto;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -104,4 +122,41 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0) translate(-50%, -50%);
+  }
+
+  to {
+    transform: rotate(-360deg) translate(-50%, -50%);
+  }
+}
+
+.loading {
+  pointer-events: none;
+  text-indent: 150%;
+  overflow: hidden;
+}
+
+.loading .icon-button {
+  opacity: 0;
+}
+
+.loading::after {
+  animation: spinner .7s linear infinite;
+  transform-origin: top left;
+  content: '';
+  position: absolute;
+  padding: 7%;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-left-color: currentColor;
+  border-right-color: currentColor;
+  opacity: 1;
 }

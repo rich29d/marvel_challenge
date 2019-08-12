@@ -1,26 +1,32 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
 const initialState = {
   loading: false,
-  
+  notification: {
+    show: false,
+    icon: "",
+    text: [],
+    type: ""
+  }
 };
 
 const tokens = {
-  CHANGE_LOADING: 'loading',
-}
+  CHANGE_LOADING: "loading",
+  TOGGLE_NOTIFICATION: "notification",
+};
 
 const rootReducer = (state = initialState, action) => {
   const { type } = action;
-  
+
   if (!tokens[type]) {
-    return state 
+    return state;
   }
 
   const token = tokens[type];
 
   return {
     ...state,
-    [token]: action[token],
+    [token]: action[token]
   };
 };
 

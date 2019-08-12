@@ -3,28 +3,43 @@ import { connect } from 'react-redux';
 
 import '../assets/style/notification.css';
 
-class Notification extends Component {
-  render() {
+class Notification extends Component {  
+  render() {    
     const {
       show = false,
       icon = '',
-      text = '',
+      text = [],
       type = '',
-    } = this.props.notification;
+    } = this.props.notification || {};
 
     const className = show ? 'Show' : '';
-    const fonticon = icon ? <i class={`fas fa-${icon}`}></i> : '';
+    const fonticon = icon ? <i className={`fas fa-${icon}`}></i> : '';
+
+    const cards = text.map((message, index) =>
+      <div style={{'animation-delay': `.${index}s`}} className={`Notification ${className} ${type} Flex Middle`}>
+        {fonticon} {message}
+      </div>);
     
-    return (
-      <div className={`Notification ${className} ${type} Flex Middle`}>
-        {fonticon} {text}
-      </div>
-    );
+    return (<div className="Box__Notifications">{ cards }</div>);
   }
 }
 
-const mapStateToProps = store => ({
-  notification: store.notification.options
-});
+const mapStateToProps = store => {
+  const {
+    show = false,
+    icon = '',
+    text = '',
+    type = '',
+  } = store.rootReducer.notification || {};
+  
+  return {
+    notification: {
+      show,
+      icon,
+      text,
+      type,
+    }
+  }
+};
 
 export default connect(mapStateToProps)(Notification);

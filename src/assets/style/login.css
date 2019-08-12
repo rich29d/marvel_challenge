@@ -1,8 +1,12 @@
 .Login {
   max-width: 500px;
   color: var(--text);
+  background: var(--secundary);
+  padding: 35px 45px;
+  border-radius: 15px;
+  box-shadow: 0 25px 90px -23px rgba(101, 37, 154, 0.5);
 }
 
 .Login img {
-  width: 200px;
+  width: 180px;
 }
