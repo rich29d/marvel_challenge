@@ -2,6 +2,11 @@
   width: 85px;  
 }
 
+.Perfil__Photo a {
+  color: #FFF;
+  margin-right: 45px;
+}
+
 .Graphic__Date--menu {
   padding: 0;
 }

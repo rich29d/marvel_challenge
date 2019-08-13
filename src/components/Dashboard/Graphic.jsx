@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   LineChart, Line, XAxis, CartesianGrid, Tooltip
 } from 'recharts';
+import serviceAuth from '../../services/auth';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -63,7 +64,7 @@ class Graphic extends Component {
     dataGraphic.reverse();
 
     return (
-      <div className="Graphic">
+      <div className="Graphic Margin__Bottom--45">
         <div className="MaxWidth">
           <div className="Flex SpaceBetween Margin__Bottom--45">
             <div className="Graphic__Date Width--8">
@@ -77,20 +78,21 @@ class Graphic extends Component {
               <div className="Graphic__Date--description Size--25">{descriptionDate}</div>
             </div>
 
-            <div className="Perfil__Photo">
+            <div className="Perfil__Photo Flex">
+              <a href="#/login" onClick={() => serviceAuth.logout()}>Sair</a>
               <img src={require('../../assets/images/user.svg')} alt="" />
             </div>
           </div>
 
           <LineChart
             width={1200}
-            height={300}
+            height={250}
             data={dataGraphic}
           >
-            <CartesianGrid horizontal={false} stroke="rgba(96, 82, 150, 0.5)" height={250} />
-            <XAxis dataKey="periodo" axisLine={false} tickLine={false} tick={{ fill: '#b2a1f3' }} />
+            <CartesianGrid horizontal={false} stroke="#614b98" height={200} />
+            <XAxis dataKey="periodo" axisLine={false} tickLine={false} tick={{ fill: '#b2a1f3' }} interval="preserveStartEnd"/>
             <Tooltip
-              cursor={{ stroke: 'rgba(96, 82, 150, 0.8)', strokeWidth: 1 }}
+              cursor={{ stroke: '#523e8a', strokeWidth: 2 }}
               labelStyle={{ color: "#FFF" }}
               itemStyle={{ color: "#FFF" }}
             />
