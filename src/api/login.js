@@ -1,9 +1,9 @@
 import backend from "./backend";
 
-export const store = async user => {
+export const store = async info => {
   const {
     data: { data = {} }
-  } = await backend.post("/users", user);
+  } = await backend.post("/login", info);
 
   return data;
 };

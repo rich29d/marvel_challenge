@@ -22,3 +22,12 @@ export const toggleNotification = notification => {
     })
   }, 100);
 };
+
+export const periodGraphic = period => {
+  return dispatch => setTimeout(() => {
+    dispatch({
+      type: "PERIOD_GRAPHIC",
+      period,
+    })
+  }, 100);
+};

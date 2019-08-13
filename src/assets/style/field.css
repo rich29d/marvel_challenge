@@ -13,12 +13,19 @@
   color: var(--text);
 }
 
-.Field label {
+.Field > label {
   font-size: 16px;
   color: var(--text);
   margin-bottom: var(--size-10);
   display: block;
   font-weight: bold;
+}
+
+.Field label span {
+  font-size: 14px;
+  color: var(--dark);
+  display: block;
+  font-weight: normal;
 }
 
 .Field input {

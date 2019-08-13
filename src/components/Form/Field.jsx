@@ -13,19 +13,22 @@ class Field extends Component {
   render() {
     const {
       label = '',
+      subLabel = '',
       placeholder = '',
       className = '',
       icon,
-      value = '',
       type = 'text',
     } = this.props;
 
     return (
       <div className={`Field ${className}`}>
-        <label>{label}</label>
+        <label>
+          {label}
+          <span>{subLabel}</span>
+        </label>        
         <div className="Flex Middle Field__Text">
           <i className={`fas fa-${icon}`}></i>
-          <input type={type} value={value} placeholder={placeholder} onChange={this.handleChange}/>
+          <input type={type} placeholder={placeholder} onChange={this.handleChange} autoComplete="off" />
         </div>
       </div>
     );

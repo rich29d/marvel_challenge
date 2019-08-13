@@ -13,8 +13,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'rdsilva_richard@hotmail.com',
-      senha: '123qwe',
+      email: '',
+      senha: '',
       loading: false
     }
   }
@@ -42,13 +42,24 @@ class Login extends Component {
     const resp = await service.login(email, senha);
     this.responseMessage(resp);    
     this.setState({ loading: false });    
-    resp.success && setTimeout(() => window.location.assign('#/dashboard'), 1000);
+    resp.success && setTimeout(() => {
+      window.location.assign('#/dashboard');
+      window.location.reload();
+    }, 3000);
   }
 
-  responseMessage({ success, messages }) {    
+  responseMessage({ success, messages }) {
+    if (!messages) {
+      return;
+    }
+    
+    const reaction = success ? `Legal!` : `Puxa!`;
+    const reactionMessage = messages.map(
+      message => `${reaction} ${message}`);
+    
     this.notification({
       icon: success ? 'check' : 'exclamation-triangle',
-      text: messages || [],
+      text: reactionMessage,
     });
   }
 
@@ -60,8 +71,8 @@ class Login extends Component {
     } = this.state;
 
     return (
-      <div className='Width--12 Height__window--100 Flex Center Middle'>
-        <div className='Login Width--11 Width__Max--4'>
+      <div className='Width--12 Height__window--100 Width__window--100 Table__Cell Middle'>
+        <div className='Login Width--11 Width__Max--4 Margin__Auto'>
           <img className='Margin__Bottom--25' src={require('../assets/images/logo.png')} alt="Logo" />
           
           <div className='Margin__Bottom--25 Width--12 Size--20'>Dados de acesso</div>

@@ -15,8 +15,10 @@ class Notification extends Component {
     const className = show ? 'Show' : '';
     const fonticon = icon ? <i className={`fas fa-${icon}`}></i> : '';
 
-    const cards = text.map((message, index) =>
-      <div style={{'animation-delay': `.${index}s`}} className={`Notification ${className} ${type} Flex Middle`}>
+    const first3Texts = text.slice(0, 3);
+
+    const cards = first3Texts.map((message, index) =>
+      <div style={{animationDelay: `.${index}s`}} className={`Notification ${className} ${type} Flex Middle`}>
         {fonticon} {message}
       </div>);
     

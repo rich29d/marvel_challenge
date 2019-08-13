@@ -5,33 +5,66 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Button from '../Form/Button.jsx';
-import service from '../../services/auth';
-import character from '../../api/users';
+import installationsService from '../../services/installations';
 import Header from './Header';
 import Graphic from './Graphic';
-import { changeLoading } from '../../share/actions';
+import { periodGraphic } from '../../share/actions';
 
-class List extends Component {
-	constructor(props) {
+import moment from 'moment';
+import 'moment/locale/pt-br';
+moment.locale('pt-BR');
+
+class Base extends Component {
+  constructor(props) {
     super(props);
     this.state = {
-      characterList: [],
-      responseRequest: {},
-      loaded: false
+      loaded: false,
     };
   }
 
-	render() {
+  async loadNumberInstallations() {
+    const countInstallations = await installationsService.countInstallations();
+  }
+
+  async loadBiggerCostInstallations() {
+    const biggerCostInstallations = await installationsService.biggerCostInstallations();
+  }
+
+  async loadBiggersSumInstallations() {
+    const biggerCostInstallations = await installationsService.biggersSumInstallations();
+  }
+
+  componentDidMount() {
+    //this.loadSumSystemSizeByPeriod('dia');
+    //this.loadSumSystemSizeByPeriod('semana');
+    //this.loadSumSystemSizeByPeriod('mes');
+    //this.loadSumSystemSizeByPeriod('ano');
+    //this.loadNumberInstallations();
+    //this.loadBiggerCostInstallations();
+    //this.loadBiggersSumInstallations();
+  }
+
+  changePeriod(period) {
+    this.loadSumSystemSizeByPeriod(period);
+  }
+
+  render() {
     return (
       <div>
-        <Header/>
+        <Header />
         <Graphic/>
-      </div>			
-		);
-	}
+      </div>
+    );
+  }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ changeLoading }, dispatch);
+const mapStateToProps = store => {
+  const period = store.rootReducer.period;
 
-export default connect(null, mapDispatchToProps)(List);
+  return { period }
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ periodGraphic }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Base);

@@ -7,12 +7,14 @@ const initialState = {
     icon: "",
     text: [],
     type: ""
-  }
+  },
+  period: 'ano',
 };
 
 const tokens = {
   CHANGE_LOADING: "loading",
   TOGGLE_NOTIFICATION: "notification",
+  PERIOD_GRAPHIC: "period",
 };
 
 const rootReducer = (state = initialState, action) => {

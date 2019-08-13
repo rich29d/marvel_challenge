@@ -9,7 +9,7 @@ import Button from './Form/Button.jsx';
 
 import '../assets/style/login.css';
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,8 @@ class Login extends Component {
       estado: '',
       email: 'rdsilva_richard@hotmail.com',
       senha: '123qwe',
-      loading: false
+      loading: false,
+      itemNotificate: null,
     }
   }
 
@@ -25,74 +26,74 @@ class Login extends Component {
     options.show = true;
     this.props.toggleNotification(options);
 
-    setTimeout(() => {
+    clearTimeout(this.state.itemNotificate);
+
+    const itemNotificate = setTimeout(() => {
       this.props.notification.show = false;
       this.props.toggleNotification(this.props.notification);
-    }, 5000);
+    }, 7000);
+
+    this.setState({ itemNotificate });
   }
 
-  setNome(nome) {
-    this.setState({ nome });
+  setInfo(key, value) {
+    this.setState({ [key]: value });
   }
 
-  setEstado(estado) {
-    this.setState({ estado });
-  }
-
-  setEmail(email) {
-    this.setState({ email });
-  }
-
-  setSenha(senha) {
-    this.setState({ senha });
-  }
-
-  async register(email, senha) {
+  async register() {
     this.setState({ loading: true });
-    const resp = await service.register(email, senha);
+    const resp = await service.register(this.state);
     this.responseMessage(resp);
     this.setState({ loading: false });
     resp.success && setTimeout(() => window.location.assign('#/login'), 1000);
   }
 
   responseMessage({ success, messages }) {
+    if (!messages) {
+      return;
+    }
+    
+    const reaction = success ? `Legal!` : `Puxa!`;
+    const reactionMessage = messages.map(
+      message => `${reaction} ${message}`);
+    
     this.notification({
       icon: success ? 'check' : 'exclamation-triangle',
-      text: messages || [],
+      text: reactionMessage,
     });
   }
 
   render() {
     const {
-      nome,
-      estado,
-      email,
-      senha,
       loading,
     } = this.state;
 
     return (
-      <div className='Width--12 Height__window--100 Flex Center Middle'>
+      <div className='Width--12 Height__window--100 Width__window--100 Table__Cell Middle'>
         <div className='Login Width--11 Width__Max--4'>
           <img className='Margin__Bottom--25' src={require('../assets/images/logo.png')} alt="Logo" />
 
-          <div className='Margin__Bottom--25 Width--12 Size--20'>Dados de acesso</div>
+          <div className='Margin__Bottom--25 Width--12 Size--20'>Dados de cadastro</div>
 
-          <Field className='Margin__Bottom--25' label={'Nome'} type={'text'}
-            onTextChange={value => this.setNome(value)} icon={'user-circle'}></Field>
+          <Field className='Margin__Bottom--25' label={'Qual é seu nome?'} type={'text'}
+            onTextChange={value => this.setInfo('nome', value)} icon={'user-circle'}></Field>
 
-          <Field className='Margin__Bottom--25' label={'Estado'} type={'text'}
-            onTextChange={value => this.setEstado(value)} icon={'map-marker-alt'}></Field>
+          <Field className='Margin__Bottom--25' label={'Em qual estado você mora?'} type={'text'}
+            onTextChange={value => this.setInfo('estado', value)} icon={'map-marker-alt'}></Field>
 
-          <Field className='Margin__Bottom--25' label={'Email'} type={'text'}
-            onTextChange={value => this.setEmail(value)} icon={'envelope'}></Field>
+          <Field className='Margin__Bottom--25' label={'Qual é seu email?'} type={'text'}
+            onTextChange={value => this.setInfo('email', value)} icon={'envelope'}></Field>
 
-          <Field className='Margin__Bottom--45' label={'Senha'} type={'password'} value={senha}
-            onTextChange={value => this.setSenha(value)} icon={'key'}></Field>
+          <Field className='Margin__Bottom--45' label={'Insira uma senha!'}
+            subLabel={<span>Pense em algo com no mínimo <strong>6</strong> caracteres!</span>}
+            type={'password'} onTextChange={value => this.setInfo('senha', value)} icon={'key'}></Field>
+
+          <Field className='Margin__Bottom--45' label={'Repita a senha, por favor!'} type={'password'}
+            onTextChange={value => this.setInfo('repitaSenha', value)} icon={'key'}></Field>
 
           <div className="Width--12 Flex Middle SpaceBetween">
             <a href="#/login">Já tenho uma conta.</a>
-            <Button text='Entrar' loading={loading} onClickEvent={() => this.register(nome, estado, email, senha)}></Button>
+            <Button text='Cadastrar' loading={loading} onClickEvent={() => this.register()}></Button>
           </div>
         </div>
       </div>
@@ -111,4 +112,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(Register);

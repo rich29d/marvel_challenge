@@ -1,13 +1,13 @@
 import backend from "./backend";
 
-export const store = async user => {
+export const index = async params => {
   const {
     data: { data = {} }
-  } = await backend.post("/users", user);
+  } = await backend.get("/installations", { params });
 
   return data;
 };
 
 export default {
-  store
+  index
 };
